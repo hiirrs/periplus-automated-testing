@@ -4,168 +4,70 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
+import io.github.bonigarcia.wdm.WebDriverManager;
+import pages.LoginPage;
+import pages.ProductPage;
+import utils.ConfigReader;
 import java.time.Duration;
 
 public class PeriplusCartTest {
     private WebDriver driver;
     private WebDriverWait wait;
-    private String expectedPrice;
+    private String BASE_URL;
     private String expectedProductName;
-
-    final String BASE_URL = "https://www.periplus.com/";
-    final String EMAIL = "zahiradina2303@gmail.com";
-    final String PASSWORD = "p3r1p455";
+    private String expectedPrice;
 
     @BeforeMethod
     public void setup() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\HP\\IdeaProjects\\drivers\\chromedriver.exe");
+        BASE_URL = ConfigReader.get(("baseUrl"));
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.manage().window().maximize();
+        driver.get(BASE_URL);
     }
 
     @Test
-    public void testAddToCart() throws InterruptedException {
-        driver.get(BASE_URL);
-        login(EMAIL, PASSWORD);
-        Thread.sleep(100);
+    public void testAddToCart() {
+        String email = ConfigReader.get("email");
+        String password = ConfigReader.get("password");
+        String product = ConfigReader.get("productName");
+        String expectedQty = ConfigReader.get("expectedQty");
 
-        searchProduct("Atomic Habits");
-        Thread.sleep(100);
+        new LoginPage(driver, wait).login(email, password);
 
-        clickFirstProduct();
-        Thread.sleep(100);
+        ProductPage page = new ProductPage(driver, wait);
+        page.searchProduct(product);
+        page.clickFirstProduct();
+        page.addToCart();
 
-        addToCart();
-        Thread.sleep(100);
+        expectedProductName = page.expectedProductName;
+        expectedPrice = page.expectedPrice;
 
-        boolean added = verifyProductInCart();
-        Assert.assertTrue(added, "Product was not added to cart successfully");
-
-        verifyQuantityAndPrice("1", expectedProductName);
-    }
-
-    private void login(String email, String password) throws InterruptedException {
-        WebElement loginLink = wait.until(ExpectedConditions.elementToBeClickable(By.partialLinkText("Sign")));
-        loginLink.click();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='email']")));
-
-        WebElement emailField = driver.findElement(By.cssSelector("input[name='email']"));
-        emailField.clear();
-        emailField.sendKeys(email);
-
-        WebElement passwordField = driver.findElement(By.cssSelector("input[name='password']"));
-        passwordField.clear();
-        passwordField.sendKeys(password);
-
-        WebElement loginButton = driver.findElement(By.cssSelector("input#button-login"));
-        loginButton.click();
-
-        try {
-            wait.until(ExpectedConditions.urlContains("account"));
-            System.out.println("Login successful");
-        } catch (TimeoutException e) {
-            System.out.println("Login timeout, check credentials or page");
-        }
-
-        Thread.sleep(100);
-    }
-
-    private void searchProduct(String productName) throws InterruptedException {
-        WebElement searchInput = wait.until(ExpectedConditions.elementToBeClickable(
-                By.cssSelector("input[name='filter_name']")));
-        searchInput.sendKeys(productName + Keys.ENTER);
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".product-area")));
-        Thread.sleep(100);
-    }
-
-    private void clickFirstProduct() throws InterruptedException {
-        waitForPreloader();
-
-        WebElement priceElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.cssSelector(".product-price")));
-        expectedPrice = priceElement.getText().trim();
-        System.out.println("Product price based on search result: " + expectedPrice);
-
-        WebElement productTitle = wait.until(ExpectedConditions.elementToBeClickable(
-                By.cssSelector("h3 > a")));
-        productTitle.click();
-
-        WebElement nameElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.cssSelector("h2")));
-        expectedProductName = nameElement.getText().trim();
-        System.out.println("Clicked product name: " + expectedProductName);
-
-        Thread.sleep(1000);
-    }
-
-
-    private void addToCart() throws InterruptedException {
-        waitForPreloader();
-
-        WebElement addToCartBtn = wait.until(ExpectedConditions.elementToBeClickable(
-                By.cssSelector("button.btn.btn-add-to-cart")));
-        addToCartBtn.click();
-
-        try {
-            wait.until(ExpectedConditions.urlContains("/checkout/cart"));
-        } catch (TimeoutException e) {
-            System.out.println("Still on product page. Redirect might be delayed.");
-        }
-
-        Thread.sleep(100);
+        Assert.assertTrue(verifyProductInCart());
+        verifyQuantityAndPrice(expectedQty, expectedProductName);
     }
 
     private boolean verifyProductInCart() {
-        driver.get("https://www.periplus.com/checkout/cart");
-        waitForPreloader();
-
-        java.util.List<WebElement> productNames = driver.findElements(
-                By.cssSelector("p.product-name.limit-lines"));
-
-        for (WebElement element : productNames) {
-            String cartName = element.getText().trim();
-            if (cartName.equalsIgnoreCase(expectedProductName)) {
-                System.out.println("Found same product in cart: " + cartName);
-                return true;
-            }
-        }
-
-        System.out.println("Product " + expectedProductName + " not found in cart.");
-        return false;
+        driver.get(BASE_URL + "checkout/cart");
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.preloader")));
+        return driver.findElements(By.cssSelector("p.product-name.limit-lines"))
+                .stream().anyMatch(el -> el.getText().trim().equalsIgnoreCase(expectedProductName));
     }
 
-
     private void verifyQuantityAndPrice(String expectedQty, String expectedProductName) {
-        java.util.List<WebElement> productContainers = driver.findElements(By.cssSelector(".row-cart-product"));
-
-        for (WebElement container : productContainers) {
+        for (WebElement container : driver.findElements(By.cssSelector(".row-cart-product"))) {
             String name = container.findElement(By.cssSelector("p.product-name.limit-lines")).getText().trim();
-
             if (name.equalsIgnoreCase(expectedProductName)) {
-                //quantity checking
-                WebElement qtyInput = container.findElement(By.cssSelector("input.input-number.text-center"));
-                String actualQty = qtyInput.getAttribute("value");
-                Assert.assertEquals(actualQty, expectedQty, "Quantity mismatch");
+                String qty = container.findElement(By.cssSelector("input.input-number.text-center")).getAttribute("value");
+                Assert.assertEquals(qty, expectedQty, "Quantity mismatch");
 
-                //price checking
-                WebElement priceText = container.findElement(By.xpath(".//div[contains(text(), 'Rp')]"));
-                String actualPrice = priceText.getText().trim();
-                Assert.assertTrue(actualPrice.contains(expectedPrice),
-                        "Price mismatch. Expected: " + expectedPrice + ", but found: " + actualPrice);
-
+                String actualPrice = container.findElement(By.xpath(".//div[contains(text(), 'Rp')]")).getText().trim();
+                Assert.assertTrue(actualPrice.contains(expectedPrice), "Price mismatch");
                 return;
             }
         }
-
-        Assert.fail("Product " + expectedProductName + " not found in cart for verification.");
-    }
-
-    private void waitForPreloader() {
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.preloader")));
+        Assert.fail("Product not found in cart.");
     }
 
     @AfterMethod
