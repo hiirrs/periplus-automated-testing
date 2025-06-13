@@ -9,8 +9,5 @@
         <module name="PeriplusTestAutomation" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="PeriplusTestAutomation" target="22" />
-    </bytecodeTargetLevel>
   </component>
 </project>
