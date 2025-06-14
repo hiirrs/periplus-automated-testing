@@ -23,7 +23,8 @@ public class PeriplusCartTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        driver.manage().window().maximize();
+//        driver.manage().window().maximize();
+        driver.manage().window().setSize(new Dimension(390, 844));
         driver.get(BASE_URL);
     }
 

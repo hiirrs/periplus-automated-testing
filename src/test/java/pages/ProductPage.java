@@ -1,15 +1,12 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductPage {
-    private WebDriver driver;
-    private WebDriverWait wait;
+    private final WebDriver driver;
+    private final WebDriverWait wait;
     public String expectedPrice;
     public String expectedProductName;
 
@@ -19,8 +16,19 @@ public class ProductPage {
     }
 
     public void searchProduct(String name) {
-        WebElement searchInput = wait.until(ExpectedConditions.elementToBeClickable(
-                By.cssSelector("input[name='filter_name']")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.preloader")));
+        WebElement searchInput;
+        if (driver.manage().window().getSize().getWidth() <= 768) {
+            searchInput = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.cssSelector("div.search-bar.mobilephone input[name='filter_name']")));
+        } else {
+            searchInput = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.cssSelector("div.search-bar-top input[name='filter_name']")));
+        }
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", searchInput);
+        wait.until(ExpectedConditions.elementToBeClickable(searchInput));
+
         searchInput.sendKeys(name + Keys.ENTER);
         wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.cssSelector(".product-area")));

@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9c466dbb-63e9-4a12-96b8-b60f59239c0e" name="Changes" comment="refactor: remove Thread.sleep and use WebDriverManager for cross-OS compatibility">
-      <change afterPath="$PROJECT_DIR$/src/test/java/pages/LoginPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/pages/ProductPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/utils/ConfigReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/OpenChromeDriverTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/PeriplusCartTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PeriplusCartTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/OpenChromeDriverTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/PeriplusCartTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/PeriplusCartTest.class" afterDir="false" />
-    </list>
+    <list default="true" id="9c466dbb-63e9-4a12-96b8-b60f59239c0e" name="Changes" comment="Merge branch 'main' of https://github.com/hiirrs/periplus-automated-testing" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,31 +49,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.PeriplusTestAutomation [test...].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "TestNG.OpenChromeDriverTest.startChromeDriver.executor": "Run",
-    "TestNG.PeriplusCartTest (1).executor": "Run",
-    "TestNG.PeriplusCartTest.executor": "Run",
-    "TestNG.PeriplusCartTest.testAddToCart.executor": "Run",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/HP/IdeaProjects/PeriplusTestAutomation/src/main/java/org/example/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.PeriplusTestAutomation [test...].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;TestNG.OpenChromeDriverTest.startChromeDriver.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.PeriplusCartTest (1).executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.PeriplusCartTest.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.PeriplusCartTest.testAddToCart.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/HP/IdeaProjects/PeriplusTestAutomation/src/main/java/org/example/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="TestNG.PeriplusCartTest.testAddToCart">
     <configuration name="OpenChromeDriverTest.startChromeDriver" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="PeriplusTestAutomation" />
@@ -180,7 +168,9 @@
       <workItem from="1749784298037" duration="4402000" />
       <workItem from="1749789824622" duration="600000" />
       <workItem from="1749790439270" duration="5524000" />
-      <workItem from="1749808185750" duration="2246000" />
+      <workItem from="1749808185750" duration="3322000" />
+      <workItem from="1749812274201" duration="1950000" />
+      <workItem from="1749913764118" duration="4240000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add login and add-to-cart testing">
       <option name="closed" value="true" />
@@ -206,7 +196,47 @@
       <option name="project" value="LOCAL" />
       <updated>1749790781761</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: implement Selenium Page Object Model for login and product pages&#10;&#10;- Created LoginPage and ProductPage classes to encapsulate UI interactions&#10;- Migrated testAddToCart to use page objects for cleaner, maintainable tests&#10;- Used ConfigReader to externalize test data (email, password, productName)">
+      <option name="closed" value="true" />
+      <created>1749810574559</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1749810574559</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update: target test-classes">
+      <option name="closed" value="true" />
+      <created>1749810837159</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1749810837159</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: mobile automated cart test">
+      <option name="closed" value="true" />
+      <created>1749917716400</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1749917716400</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Merge branch 'main' of https://github.com/hiirrs/periplus-automated-testing">
+      <option name="closed" value="true" />
+      <created>1749917890581</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1749917890581</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Merge branch 'main' of https://github.com/hiirrs/periplus-automated-testing">
+      <option name="closed" value="true" />
+      <created>1749917985015</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1749917985015</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,6 +246,10 @@
     <MESSAGE value="feat: add login and add-to-cart testing" />
     <MESSAGE value="feat: price checking based on the test specification" />
     <MESSAGE value="refactor: remove Thread.sleep and use WebDriverManager for cross-OS compatibility" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: remove Thread.sleep and use WebDriverManager for cross-OS compatibility" />
+    <MESSAGE value="feat: implement Selenium Page Object Model for login and product pages&#10;&#10;- Created LoginPage and ProductPage classes to encapsulate UI interactions&#10;- Migrated testAddToCart to use page objects for cleaner, maintainable tests&#10;- Used ConfigReader to externalize test data (email, password, productName)" />
+    <MESSAGE value="update: target test-classes" />
+    <MESSAGE value="feat: mobile automated cart test" />
+    <MESSAGE value="Merge branch 'main' of https://github.com/hiirrs/periplus-automated-testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'main' of https://github.com/hiirrs/periplus-automated-testing" />
   </component>
 </project>
